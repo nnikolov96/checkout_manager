@@ -3,7 +3,7 @@ require_relative 'promotional_rule/cheap_chair_discount_rule'
 
 class RuleGenerator
   def self.initialize(name)
-    case name
+    case name.to_sym
     when :ten_percent_discount then TenPercentDiscountRule.new
     when :cheap_chair_discount then CheapChairDiscountRule.new
     else

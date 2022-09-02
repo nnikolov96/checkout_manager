@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'item'
 
 class GenericRuleTest < Minitest::Test
   def test_should_raise_error_on_init

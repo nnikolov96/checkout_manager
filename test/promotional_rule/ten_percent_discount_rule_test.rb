@@ -1,5 +1,4 @@
 require 'test_helper'
-require 'item'
 
 class TenPercentDiscountRuleTest < Minitest::Test
   def test_should_apply_ten_percent_discount_when_total_over_60

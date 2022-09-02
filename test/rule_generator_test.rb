@@ -1,6 +1,4 @@
 require 'test_helper'
-require 'rule_generator'
-require 'item'
 
 class RuleGeneratorTest < Minitest::Test
   def test_should_create_ten_percent_discount_rule_object
