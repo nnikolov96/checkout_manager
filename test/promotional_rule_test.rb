@@ -11,7 +11,7 @@ class PromotionalRuleTest < Minitest::Test
   
     line_item_1.increment_count
   
-    pr = PromotionalRule.new(:ten_percent_discount)
+    pr = PromotionalRule.new(:ten_percent_discount, 2)
     line_items = pr.apply([line_item_1, line_item_2])
   
     assert_equal 57.15, line_items.sum(&:total)
@@ -24,7 +24,7 @@ class PromotionalRuleTest < Minitest::Test
     line_item_1 = LineItem.new(item: item_1)
     line_item_2 = LineItem.new(item: item_2)
   
-    pr = PromotionalRule.new(:ten_percent_discount)
+    pr = PromotionalRule.new(:ten_percent_discount, 2)
     line_items = pr.apply([line_item_1, line_item_2])
   
     assert_equal 54.25, line_items.sum(&:total)
@@ -36,7 +36,7 @@ class PromotionalRuleTest < Minitest::Test
 
     line_item_1.increment_count
 
-    pr = PromotionalRule.new(:cheap_chair_discount)
+    pr = PromotionalRule.new(:cheap_chair_discount, 1)
     line_items = pr.apply([line_item_1])
 
     assert_equal 17.0, line_items.sum(&:total)
@@ -46,14 +46,14 @@ class PromotionalRuleTest < Minitest::Test
     item_1 = Item.new('001',"Very Cheap Chair", 9.25)
     line_item_1 = LineItem.new(item: item_1)
 
-    pr = PromotionalRule.new(:cheap_chair_discount)
+    pr = PromotionalRule.new(:cheap_chair_discount, 1)
     line_items = pr.apply([line_item_1])
 
     assert_equal 9.25, line_items.sum(&:total)
   end
 
   def test_should_raise_error_if_empty_array_is_passed_to_promotional_rule
-    pr = PromotionalRule.new(:ten_percent_discount)
+    pr = PromotionalRule.new(:ten_percent_discount, 2)
     assert_raises ArgumentError do
       line_items = pr.apply([])
     end

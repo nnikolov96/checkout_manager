@@ -1,8 +1,9 @@
 class PromotionalRule
   DISCOUNTED_001_PRICE = 8.50
-
-  def initialize(rule_name)
+  attr_reader :priority
+  def initialize(rule_name, priority)
     @rule_name = rule_name
+    @priority = priority
     @line_items = []
   end
 
