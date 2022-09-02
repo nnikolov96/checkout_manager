@@ -1,4 +1,4 @@
-require 'promotional_rule'
+require 'rule_generator'
 require 'line_item'
 
 class Checkout
@@ -6,7 +6,7 @@ class Checkout
 
   def initialize(promotional_rules = [])
     @line_items = []
-    @promotional_rules = promotional_rules.map { |rule| PromotionalRule.new(rule[:name], rule[:priority]) }
+    @promotional_rules = promotional_rules.map { |rule| RuleGenerator.initialize(rule[:name]) }
   end
 
   def scan(new_item)
