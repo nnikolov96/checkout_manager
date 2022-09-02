@@ -7,6 +7,8 @@ class PromotionalRule
   end
 
   def apply(line_items)
+    raise ArgumentError.new, 'Line items should be present' if line_items.empty?
+
     @line_items = line_items
     send(@rule_name)
   end

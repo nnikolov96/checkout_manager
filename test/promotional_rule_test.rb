@@ -51,4 +51,11 @@ class PromotionalRuleTest < Minitest::Test
 
     assert_equal 9.25, line_items.sum(&:total)
   end
+
+  def test_should_raise_error_if_empty_array_is_passed_to_promotional_rule
+    pr = PromotionalRule.new(:ten_percent_discount)
+    assert_raises ArgumentError do
+      line_items = pr.apply([])
+    end
+  end
 end
