@@ -14,13 +14,11 @@ class TenPercentDiscountRule < GenericRule
 
     total = line_items.sum(&:total)
 
-    if total > 60
-      line_items.map do |line_item|
-        line_item.price = line_item.price - (line_item.price * 0.1)
-        line_item
-      end
-    else
-      line_items
+    return line_items if total <= 60
+
+    line_items.map do |line_item|
+      line_item.price = line_item.price - (line_item.price * 0.1)
+      line_item
     end
   end
 end

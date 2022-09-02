@@ -13,7 +13,8 @@ class CheapChairDiscountRule < GenericRule
   def apply(line_items)
     raise ArgumentError.new, 'Line items should be present' if line_items.empty?
 
-    cheap_chairs = line_items.find { |line_item| line_item.item.product_code == "001" }
+    cheap_chairs = find_cheap_chairs(line_items)
+
     if cheap_chairs && cheap_chairs.count > 1
       line_items = line_items.map do |line_item|
         line_item.price = line_item.item.product_code == '001' ? DISCOUNTED_001_PRICE : line_item.price
@@ -22,5 +23,11 @@ class CheapChairDiscountRule < GenericRule
     end
 
     line_items
+  end
+
+  private
+
+  def find_cheap_chairs(line_items)
+    line_items.find { |line_item| line_item.item.product_code == "001" }
   end
 end

@@ -10,7 +10,7 @@ class Checkout
   end
 
   def scan(new_item)
-    line_item = @line_items.find { |line_item| line_item.item.product_code == new_item.product_code }
+    line_item = find_line_item(new_item.product_code)
 
     if line_item
       line_item.increment_count
@@ -20,10 +20,19 @@ class Checkout
   end
 
   def total
+    apply_rules
+
+    @line_items.sum(&:total).round(2)
+  end
+
+  private
+  def find_line_item(product_code)
+    @line_items.find { |line_item| line_item.item.product_code == product_code }
+  end
+
+  def apply_rules
     @promotional_rules.sort_by(&:priority).each do |rule|
       @line_items = rule.apply(@line_items)
     end
-
-    @line_items.sum(&:total).round(2)
   end
 end
